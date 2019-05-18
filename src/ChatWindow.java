@@ -9,7 +9,7 @@ public class ChatWindow extends JFrame {
 
     public ChatWindow() {
         setTitle("Чат");
-        setBounds(200,200, 500, 500);
+        setBounds(200, 200, 500, 500);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         setLayout(new BorderLayout());
@@ -31,15 +31,13 @@ public class ChatWindow extends JFrame {
 
         JTextArea writeMesArea = new JTextArea();
         writeMesArea.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 100));
-        writeMesArea.setFont(new Font("Serif", Font.BOLD, 14));
+        writeMesArea.setFont(new Font("Serif", Font.PLAIN, 14));
         writeMesArea.setLineWrap(true);
         writeMesArea.setWrapStyleWord(true);
-        Action enter = new AbstractAction()
-        {
+        Action enter = new AbstractAction() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                writeMesArea.append( writeMesArea.getText() + "\n" );
+            public void actionPerformed(ActionEvent e) {
+                writeMesArea.append(writeMesArea.getText() + "\n");
                 writeMesArea.setText("");
             }
         };
@@ -47,21 +45,20 @@ public class ChatWindow extends JFrame {
         writeMesArea.getActionMap().put("insert-break", enter);
         writeMesArea.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER)
-                    if(e.isShiftDown()) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (e.isShiftDown()) {
                         writeMesArea.append(" \n");
-                    } else
-                    {
+                    } else {
                         messListModel.addElement(writeMesArea.getText());
                         int index = messListModel.size() - 1;
                         messagesList.setSelectedIndex(index);
                         messagesList.ensureIndexIsVisible(index);
                         writeMesArea.setText("");
-                        if (writeMesArea.getCaretPosition() > 0)
-                        {
+                        if (writeMesArea.getCaretPosition() > 0) {
                             writeMesArea.setCaretPosition(0);
                         }
                     }
+                }
             }
         });
 
